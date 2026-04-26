@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Internship App{% endblock %}</title>
+
+    <!-- Original Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" xintegrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+    <!-- Google Fonts - Switched to Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Custom Styles -->
+    <style>
+        /*
+         * Custom Stylesheet (v4 with New Font & Colors)
+         * This section enhances the default Bootstrap styles with a new font (Poppins)
+         * and a sophisticated, professional color palette.
+         */
+
+        /* 1. General Body & Typography
+        ----------------------------------*/
+        body {
+            /* New Font: Poppins */
+            font-family: 'Poppins', sans-serif;
+            /* New Background: Subtle and calming gray-to-blue gradient */
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: #34495e;
+        }
+
+        /* Heading styles for consistency */
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            color: #2c3e50;
+        }
+
+        /* 2. Navbar Customization
+        ----------------------------------*/
+        .navbar.bg-dark {
+            /* New Header: Rich, deep teal gradient */
+            background: linear-gradient(90deg, #005C6E, #008280) !important;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            padding: 0.5rem 0;
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+            letter-spacing: -1px;
+            color: #fff !important;
+        }
+
+        .navbar .nav-item {
+            margin: 0 0.25rem;
+        }
+
+        .navbar .nav-link {
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.85);
+            transition: all 0.3s ease;
+            padding: 0.75rem 1rem !important;
+            border-radius: 8px;
+        }
+
+        .navbar .nav-link:hover,
+        .navbar .nav-link.active {
+            color: #ffffff !important;
+            background-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .navbar-dark .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.85%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+        }
+
+        .navbar-toggler {
+            border-color: rgba(255,255,255,0.2);
+        }
+
+        .navbar-toggler:focus {
+            box-shadow: 0 0 0 0.25rem rgba(255,255,255,0.25);
+        }
+
+        /* 3. Dropdown Menu Styling
+        ----------------------------------*/
+        .dropdown-menu {
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+            padding: 0.5rem 0;
+            margin-top: 0.5rem !important;
+            animation: fadeIn 0.2s ease-out;
+            background-color: #ffffff;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .dropdown-item {
+            padding: 0.75rem 1.5rem;
+            font-weight: 500;
+            color: #34495e;
+            transition: background-color 0.2s ease, color 0.2s ease;
+        }
+
+        .dropdown-item:hover, .dropdown-item:focus {
+            background-color: #f5f7fa;
+            /* New hover color to match theme */
+            color: #005C6E;
+        }
+
+        .dropdown-item.active, .dropdown-item:active {
+             /* New active color to match theme */
+             background-color: #005C6E;
+             color: white;
+        }
+
+        /* 4. Main Content Area
+        ----------------------------------*/
+        main.container {
+            padding-top: 2.5rem;
+            padding-bottom: 4rem;
+        }
+
+        /* Gradient text for page titles updated to match new theme */
+        .page-header h1, .page-header h2 {
+            background: linear-gradient(90deg, #005C6E, #00b3b0);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        /* 5. Flashed Messages / Alerts Customization
+        ----------------------------------*/
+        .alert {
+            border-radius: 12px;
+            border: none;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+            padding: 1.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: #fff;
+        }
+
+        .alert-success {
+            background: linear-gradient(90deg, #1dd1a1, #10ac84);
+        }
+
+        .alert-danger {
+            background: linear-gradient(90deg, #ff6b6b, #ee5253);
+        }
+
+        .alert-warning {
+            background: linear-gradient(90deg, #feca57, #ff9f43);
+            color: #212529;
+        }
+
+        .alert-info {
+            background: linear-gradient(90deg, #54a0ff, #2e86de);
+        }
+
+        .alert .btn-close {
+            filter: invert(1) grayscale(100%) brightness(200%);
+        }
+
+        .alert-warning .btn-close {
+             filter: none;
+        }
+
+        /* 6. General Component Styling
+        ----------------------------------*/
+        .btn {
+            border-radius: 8px;
+            font-weight: 600;
+            padding: 0.8rem 1.8rem;
+            transition: all 0.25s ease-in-out;
+            border: none;
+            color: white !important;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn-primary {
+            background: linear-gradient(90deg, #54a0ff, #2e86de) !important;
+        }
+        .btn-secondary {
+            background: linear-gradient(90deg, #95a5a6, #7f8c8d) !important;
+        }
+        .btn-danger {
+            background: linear-gradient(90deg, #ff6b6b, #ee5253) !important;
+        }
+        .btn-success {
+            background: linear-gradient(90deg, #1dd1a1, #10ac84) !important;
+        }
+        .btn-info {
+            background: linear-gradient(90deg, #48dbfb, #0abde3) !important;
+        }
+
+        .card {
+            border: none;
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(149, 157, 165, 0.1);
+            transition: all 0.3s ease;
+            background-color: #ffffff;
+        }
+
+        .card-header {
+            font-weight: 600;
+            font-size: 1.2rem;
+            color: #34495e;
+            background-color: #f5f7fa;
+            padding: 1.5rem 1.5rem 1rem;
+            border-bottom: 1px solid #dee2e6;
+            border-top-left-radius: 16px;
+            border-top-right-radius: 16px;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            /* New hover glow to match theme */
+            box-shadow: 0 12px 28px rgba(0, 92, 110, 0.15);
+        }
+
+        .form-control, .form-select {
+            border-radius: 8px;
+            padding: 0.85rem 1.1rem;
+            border: 1px solid #ced4da;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .form-control:focus, .form-select:focus {
+            /* New focus color to match theme */
+            border-color: #005C6E;
+            box-shadow: 0 0 0 0.25rem rgba(0, 92, 110, 0.25);
+        }
+    </style>
+</head>
+<body class="bg-light">
+
+    <!-- NAV BAR -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{{ url_for('index') }}">InternMatch</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    {% if session.get('student_id') %}
+                        <li class="nav-item"><a class="nav-link" href="{{ url_for('student_profile') }}">My Profile</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ url_for('logout') }}">Logout</a></li>
+                    {% elif session.get('employer_id') %}
+                        <li class="nav-item"><a class="nav-link" href="{{ url_for('employer_profile') }}">Company Profile</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ url_for('logout') }}">Logout</a></li>
+                    {% else %}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                For Students
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="{{ url_for('student_signup') }}">Signup</a></li>
+                                <li><a class="dropdown-item" href="{{ url_for('student_login') }}">Login</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                For Employers
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="{{ url_for('employer_signup') }}">Signup</a></li>
+                                <li><a class="dropdown-item" href="{{ url_for('employer_login') }}">Login</a></li>
+                            </ul>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <main class="container mt-4">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                        <span>{{ message }}</span>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" xintegrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</body>
+</html>
+

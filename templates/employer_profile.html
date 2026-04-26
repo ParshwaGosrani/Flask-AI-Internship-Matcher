@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block title %}Employer Profile{% endblock %}
+
+{% block content %}
+<!-- Page header with gradient text from base.html -->
+<div class="page-header text-center mb-4">
+    <h2>Company Profile</h2>
+</div>
+
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <!-- The card will automatically inherit the styles from base.html -->
+        <div class="card">
+            <!-- Consistent card-header styling -->
+            <div class="card-header">
+                <h3 class="card-title text-center">Manage Your Internship Details</h3>
+            </div>
+            <!-- Added p-4 for better internal spacing -->
+            <div class="card-body p-4">
+                <form method="post">
+                    <div class="mb-3">
+                        <label for="company_name" class="form-label">Company Name</label>
+                        <input type="text" class="form-control" id="company_name" name="company_name" value="{{ employer.company_name if employer else '' }}" placeholder="e.g., Tech Solutions Inc." required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="position_offered" class="form-label">Position Offered</label>
+                        <input type="text" class="form-control" id="position_offered" name="position_offered" value="{{ employer.position_offered if employer else '' }}" placeholder="e.g., Software Engineer Intern">
+                    </div>
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Description</label>
+                        <textarea class="form-control" id="description" name="description" rows="4" placeholder="Describe the role and responsibilities...">{{ employer.description if employer else '' }}</textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="required_skills" class="form-label">Required Skills</label>
+                        <input type="text" class="form-control" id="required_skills" name="required_skills" value="{{ employer.required_skills if employer else '' }}" placeholder="e.g., Python, JavaScript, SQL">
+                    </div>
+                    <div class="mb-3">
+                        <label for="location_of_work" class="form-label">Location of Work</label>
+                        <input type="text" class="form-control" id="location_of_work" name="location_of_work" value="{{ employer.location_of_work if employer else '' }}" placeholder="e.g., New York, NY or Remote" pattern="[a-zA-Z\s,.]+" title="Location should only contain text characters." required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="stipend" class="form-label">Stipend</label>
+                        <input type="text" class="form-control" id="stipend" name="stipend" value="{{ employer.stipend if employer else '' }}" placeholder="e.g., $2000/month">
+                    </div>
+                    <div class="d-grid mt-4">
+                        <!-- btn and btn-primary are styled in base.html -->
+                        <button type="submit" class="btn btn-primary">Save Profile</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

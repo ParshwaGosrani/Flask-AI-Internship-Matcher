@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block title %}Student Signup{% endblock %}
+
+{% block content %}
+<!-- Page header with gradient text from base.html -->
+<div class="page-header text-center mb-4">
+    <h2>Create Your Student Account</h2>
+</div>
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <!-- The card will automatically inherit styles from base.html -->
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title text-center">Join InternMatch</h3>
+            </div>
+            <!-- Added p-4 for better internal spacing -->
+            <div class="card-body p-4">
+                <form method="post">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Full Name</label>
+                        <!-- form-control styles are inherited -->
+                        <input type="text" class="form-control" id="name" name="name" placeholder="e.g., Priya Kumar" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email Address</label>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="you@university.edu" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="password" name="password" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="confirm_password" class="form-label">Confirm Password</label>
+                        <input type="password" class="form-control" id="confirm_password" name="confirm_password" required>
+                    </div>
+                    <div class="d-grid mt-4">
+                        <!-- btn-primary styles are inherited -->
+                        <button type="submit" class="btn btn-primary">Sign Up</button>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer text-center">
+                <!-- Added classes for consistent link styling -->
+                <small>Already have an account? <a href="{{ url_for('student_login') }}" class="fw-bold text-decoration-none">Log In</a></small>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

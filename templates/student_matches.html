@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% block title %}Your Internship Matches{% endblock %}
+
+{% block content %}
+<style>
+    .card-match {
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        border: none; /* The base card style already has a good shadow */
+    }
+    .card-match:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 12px 24px rgba(0, 121, 107, 0.25); /* Enhanced glow effect from base.html */
+    }
+    .badge-match {
+        background: linear-gradient(45deg, #1d976c, #93f9b9);
+        color: #004d40; /* Dark teal text for contrast */
+        padding: 0.6em 1.2em;
+        font-size: 1rem;
+        font-weight: 700;
+        border-radius: 50px; /* Pill shape */
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .badge-keyword {
+        background: linear-gradient(45deg, #00796b, #004d40); /* Teal gradient from theme */
+        color: white;
+        font-weight: 500;
+        padding: 0.4em 0.8em;
+    }
+</style>
+
+<div class="container">
+    <div class="page-header text-center mb-5">
+        <h1>Top 5 Internship Matches</h1>
+        <p class="lead text-muted">Based on your profile, here are the best matches we found for you.</p>
+    </div>
+
+    {% if matches %}
+        {% for match in matches %}
+        <div class="card card-match mb-4">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0 fw-bold">{{ match.company_name }}</h5>
+                <span class="badge-match">{{ match.match_percentage }}% Match</span>
+            </div>
+            <div class="card-body px-4 py-3">
+                <h6 class="card-title fs-5 text-primary-emphasis">{{ match.position }}</h6>
+                <p class="card-text text-muted">
+                    <strong>Location:</strong> {{ match.location }} <br>
+                    <strong>Stipend:</strong> {{ match.stipend }}
+                </p>
+                
+                <p class="card-text mt-3">
+                    <em>"{{ match.description }}"</em>
+                </p>
+
+                {% if match.matched_keywords %}
+                <div class="mt-3">
+                    <strong>Matched Skills:</strong>
+                    <div class="d-flex flex-wrap gap-2 mt-2">
+                    {% for keyword in match.matched_keywords %}
+                        <span class="badge rounded-pill badge-keyword">{{ keyword }}</span>
+                    {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    {% else %}
+        <div class="alert alert-warning" role="alert">
+            <h4 class="alert-heading">No Matches Found!</h4>
+            <p>We couldn't find any internships that match your profile right now. Make sure your profile is fully updated with all your skills and interests to get the best results.</p>
+        </div>
+    {% endif %}
+
+    <div class="text-center mt-5">
+        <a href="{{ url_for('student_profile') }}" class="btn btn-secondary px-4 py-2">Back to Profile</a>
+    </div>
+</div>
+{% endblock %}
